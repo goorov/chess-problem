@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 type pos struct {
-    x, y int
+	x, y int
 }
 
 type figureOnBoard struct {
@@ -16,31 +16,31 @@ var inc = func(i int) int { return i + 1 }
 var dec = func(i int) int { return i - 1 }
 
 func main() {
-    // entry point: board dimension and quantity of each type
-    // of figures (Kings, Queens, Bishops, Rooks and Knights)
+	// entry point: board dimension and quantity of each type
+	// of figures (Kings, Queens, Bishops, Rooks and Knights)
 	start(pos{3, 4}, 0, 0, 1, 2, 1)
 }
 
 func start(d pos, kings, queens, bishops, rooks, knights int) {
-    if d.x < 1 || d.y < 1 {
-    	fmt.Println("The input dimensions should be positive values, exit program")
-    } else if kings < 0 || queens < 0 || bishops < 0 || rooks < 0 || knights < 0 {
-    	fmt.Println("The quantity of each of figure should be positive, exit program")
-    } else if kings == 0 && queens == 0 && bishops == 0 && rooks == 0 && knights == 0 {
-	    fmt.Println("At least one figure should be present, exit program")
-    } else {
-    	fmt.Println(internalStart(d, kings, queens, bishops, rooks, knights))
-    }
+	if d.x < 1 || d.y < 1 {
+		fmt.Println("The input dimensions should be positive values, exit program")
+	} else if kings < 0 || queens < 0 || bishops < 0 || rooks < 0 || knights < 0 {
+		fmt.Println("The quantity of each of figure should be positive, exit program")
+	} else if kings == 0 && queens == 0 && bishops == 0 && rooks == 0 && knights == 0 {
+		fmt.Println("At least one figure should be present, exit program")
+	} else {
+		fmt.Println(internalStart(d, kings, queens, bishops, rooks, knights))
+	}
 }
 
 func internalStart(d pos, kings, queens, bishops, rooks, knights int) int {
 	dim = d
-    figures := make([]string, 0, kings + queens + bishops + rooks + knights)
-    figures = append(figures, makeFigureSlice("king", kings)...)
-    figures = append(figures, makeFigureSlice("queen", queens)...)
-    figures = append(figures, makeFigureSlice("bishop", bishops)...)
-    figures = append(figures, makeFigureSlice("rook", rooks)...)
-    figures = append(figures, makeFigureSlice("knight", knights)...)
+	figures := make([]string, 0, kings + queens + bishops + rooks + knights)
+	figures = append(figures, makeFigureSlice("king", kings)...)
+	figures = append(figures, makeFigureSlice("queen", queens)...)
+	figures = append(figures, makeFigureSlice("bishop", bishops)...)
+	figures = append(figures, makeFigureSlice("rook", rooks)...)
+	figures = append(figures, makeFigureSlice("knight", knights)...)
 	return sum(permutations(figures))
 }
 
